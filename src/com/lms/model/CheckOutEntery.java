@@ -1,4 +1,4 @@
-
+package com.lms.model;
 
 /**
  * @author maher
