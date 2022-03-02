@@ -4,7 +4,7 @@ import com.lms.common.LmsUtility;
 
 import java.io.IOException;
 
-public class Dashboard {
+public class DashboardUI {
     public static void displayDashboard(){
         System.out.println("****************************************************************");
         System.out.println("               Welcome to Library Mgmt System                   ");

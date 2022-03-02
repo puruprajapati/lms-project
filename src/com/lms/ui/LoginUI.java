@@ -1,15 +1,17 @@
 package com.lms.ui;
 
 import com.lms.business.Authentication;
+import com.lms.model.Login;
+
 import java.io.IOException;
 
 import static com.lms.Main.bufferedReader;
 
-public class Login {
+public class LoginUI {
 
     public  static Boolean displayLogin(){
         Authentication authService = Authentication.getInstance();
-        com.lms.model.Login userCredential = new com.lms.model.Login();
+        Login userCredential = new Login();
         try {
             System.out.println("Enter username: ");
             userCredential.setUsername(bufferedReader.readLine());
