@@ -1,21 +1,47 @@
 package com.lms.model;
 
-/**
- * @author maher
- * @version 1.0
- * @created 01-Mar-2022 12:00:03 PM
- */
-public class BookCopy {
-	private boolean available;
-	private int copyNum;
+import java.io.Serializable;
+
+public final class BookCopy implements Serializable {
+
+    private static final long serialVersionUID = -63976228084869815L;
+    private Book book;
+    private int copyNum;
+    private boolean isAvailable;
+    public BookCopy(Book book, int copyNum, boolean isAvailable) {
+        this.book = book;
+        this.copyNum = copyNum;
+        this.isAvailable = isAvailable;
+    }
+
+    BookCopy(Book book, int copyNum) {
+        this.book = book;
+        this.copyNum = copyNum;
+    }
 
 
-	public BookCopy(){
+    public boolean isAvailable() {
+        return isAvailable;
+    }
 
-	}
+    public int getCopyNum() {
+        return copyNum;
+    }
 
-	public void finalize() throws Throwable {
+    public Book getBook() {
+        return book;
+    }
 
-	}
+    public void changeAvailability() {
+        isAvailable = !isAvailable;
+    }
+
+    @Override
+    public boolean equals(Object ob) {
+        if(ob == null) return false;
+        if(!(ob instanceof BookCopy)) return false;
+        BookCopy copy = (BookCopy)ob;
+        return copy.book.getIsbn().equals(book.getIsbn()) && copy.copyNum == copyNum;
+    }
 
 }

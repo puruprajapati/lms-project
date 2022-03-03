@@ -2,6 +2,7 @@ package com.lms;
 
 import com.lms.dataaccess.DataAccess;
 import com.lms.dataaccess.DataAccessFacade;
+import com.lms.dataaccess.LoadData;
 import com.lms.model.Book;
 import com.lms.ui.DashboardUI;
 import com.lms.ui.LoginUI;
@@ -17,39 +18,9 @@ public class Main {
     public static BufferedReader bufferedReader = new BufferedReader(isr);
 
     public static void main(String[] args) throws IOException {
-
-        DataAccess da = new DataAccessFacade();
-
-        List<Book> allBooks = new ArrayList<Book>() {
-            {
-                add(new Book("23-11451", "The Big Fish", 21));
-                add(new Book("23-11452", "The Big Fish2", 21));
-            }
-        };
-
-        System.out.println(allBooks);
-
-        DataAccessFacade.loadBookMap(allBooks);
-
-        List<Book> books = new ArrayList<>();
-        HashMap<String, Book> b = da.readBooksMap();
-        if (b != null) {
-            Set<String> keys = b.keySet();
-            for (String k : keys) {
-                Book lb = b.get(k);
-                books.add(lb);
-            }
-        }
-
-        for(Book bk : books){
-            System.out.println(bk.getIsbn());
-            System.out.println(bk.getTitle());
-        }
-
-
-        da.clearBooks();
-
-        //initApp();
+        LoadData ld = new LoadData();
+        ld.loadAllData();
+        initApp();
     }
 
     public static void initApp() throws IOException {
@@ -69,4 +40,5 @@ public class Main {
             initApp();
         }
     }
+
 }

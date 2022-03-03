@@ -1,55 +1,114 @@
 package com.lms.model;
 
-/**
- * @author maher
- * @version 1.0
- * @created 01-Mar-2022 12:00:02 PM
- */
-public class Book {
+import java.io.Serializable;
+import java.util.*;
 
-	/*
-	private int avilableCopies;
-	private String ISBN;
-	private int maxCheckoutDays;
-	private String title;
-	public BookCopy m_BookCopy;
+final public class Book implements Serializable {
+
+    private static final long serialVersionUID = 6110690276685962829L;
+    private BookCopy[] copies;
+    private final List<Author> authors;
+    private final String isbn;
+    private final String title;
+    private final int maxCheckoutLength;
+
+    public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
+        this.isbn = isbn;
+        this.title = title;
+        this.maxCheckoutLength = maxCheckoutLength;
+        this.authors = Collections.unmodifiableList(authors);
+        copies = new BookCopy[]{new BookCopy(this, 1, true)};
+    }
+
+    public void updateCopies(BookCopy copy) {
+        for (int i = 0; i < copies.length; ++i) {
+            BookCopy c = copies[i];
+            if (c.equals(copy)) {
+                copies[i] = copy;
+            }
+        }
+    }
+
+    public List<Integer> getCopyNums() {
+        List<Integer> retVal = new ArrayList<>();
+        for (BookCopy c : copies) {
+            retVal.add(c.getCopyNum());
+        }
+        return retVal;
+
+    }
+
+    public void addCopy() {
+        BookCopy[] newArr = new BookCopy[copies.length + 1];
+        System.arraycopy(copies, 0, newArr, 0, copies.length);
+        newArr[copies.length] = new BookCopy(this, copies.length + 1, true);
+        copies = newArr;
+    }
 
 
-	public Book(){
+    @Override
+    public boolean equals(Object ob) {
+        if (ob == null) return false;
+        if (ob.getClass() != getClass()) return false;
+        Book b = (Book) ob;
+        return b.isbn.equals(isbn);
+    }
 
-	}
 
-	public void finalize() throws Throwable {
+    public boolean isAvailable() {
+        if (copies == null) {
+            return false;
+        }
+        return Arrays.stream(copies)
+                .map(l -> l.isAvailable())
+                .reduce(false, (x, y) -> x || y);
+    }
 
-	}
+    @Override
+    public String toString() {
+        return "- isbn: " + isbn + ", title: " + getTitle() + ", maxCheckOutLength: " + maxCheckoutLength + ", available: " + isAvailable() + "\n"
+                + "                   Author: " + authors;
+    }
 
-	public boolean addNewCopy(int copyNum){
-		return false;
-	}
+    public int getNumCopies() {
+        return copies.length;
+    }
 
-	public boolean checkAvailability(){
-		return false;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	*/
-	private static final long serialVersionUID = 6110690276685962829L;
-	private final String isbn;
-	private final String title;
-	private final int maxCheckoutLength;
-	public Book(String isbn, String title, int maxCheckoutLength) {
-		this.isbn = isbn;
-		this.title = title;
-		this.maxCheckoutLength = maxCheckoutLength;
-	}
+    public BookCopy[] getCopies() {
+        return copies;
+    }
 
-	public String getIsbn() {
-		return isbn;
-	}
+    public List<Author> getAuthors() {
+        return authors;
+    }
 
-	public String getTitle(){
-		return title;
-	}
+    public String getIsbn() {
+        return isbn;
+    }
 
+    public BookCopy getNextAvailableCopy() {
+        Optional<BookCopy> optional
+                = Arrays.stream(copies)
+                .filter(x -> x.isAvailable()).findFirst();
+        return optional.isPresent() ? optional.get() : null;
+    }
+
+    public BookCopy getCopy(int copyNum) {
+        for (BookCopy c : copies) {
+            if (copyNum == c.getCopyNum()) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public int getMaxCheckoutLength() {
+        return maxCheckoutLength;
+    }
 
 
 }

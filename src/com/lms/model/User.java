@@ -1,39 +1,40 @@
 package com.lms.model;
 
-/**
- * @author maher
- * @version 1.0
- * @created 01-Mar-2022 12:00:03 PM
- */
-public class User {
+import com.lms.common.LmsConstant;
 
-	public User(){
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
-	}
+public class User implements Serializable {
+    private String id;
+    private String password;
+    private LmsConstant.Authorization authorization;
 
-	public void finalize() throws Throwable {
+    public User(String id, String password, LmsConstant.Authorization authorization) {
+        this.id = id;
+        this.password = password;
+        this.authorization=authorization;
+    }
 
-	}
+    public String getId() {
+        return id;
+    }
 
-}
 
-/**
- * @author maher
- * @version 1.0
- * @updated 02-Mar-2022 11:05:34 AM
- */
-public class Address {
+    public String getPassword() {
+        return password;
+    }
 
-	private String city;
-	private String street;
-	private int zip;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                '}';
+    }
 
-	public Address(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-
+    public LmsConstant.Authorization getAuthorization() {
+        return authorization;
+    }
 }
