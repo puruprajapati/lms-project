@@ -37,6 +37,7 @@ public class BookService {
         return books;
     }
 
+    // add book with one new copy
     public void addNewBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
         Book book = new Book(isbn, title, maxCheckoutLength, authors);
         da.saveNewBook(book);

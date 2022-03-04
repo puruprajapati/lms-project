@@ -2,6 +2,7 @@ package com.lms.business;
 
 import com.lms.dataaccess.DataAccess;
 import com.lms.dataaccess.DataAccessFacade;
+import com.lms.model.Book;
 import com.lms.model.LibraryMember;
 
 import java.util.ArrayList;
@@ -32,6 +33,22 @@ public class MemberService {
             membersList.add(lb);
         }
         return membersList;
+    }
+
+    public LibraryMember getMember(String memberId){
+        LibraryMember member = null;
+        HashMap<String, LibraryMember> members = da.readMemberMap();
+
+        if (!(members.containsKey(memberId))) {
+            return null;
+        }
+        Set<String> keys = members.keySet();
+        for (String k : keys) {
+            if (k.equals(memberId)) {
+                member = members.get(k);
+            }
+        }
+        return member;
     }
 
     public void addNewMember(LibraryMember member){

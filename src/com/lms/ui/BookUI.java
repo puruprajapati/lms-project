@@ -93,4 +93,11 @@ public class BookUI {
         DashboardUI.enterKey("Book Updated Successfully");
     }
 
+    public static void addBookCopy() throws IOException{
+        Book bk = addBookFunction("Enter information of a book to be copied");
+        BookService.getInstance().addBookCopy(bk);
+
+        DashboardUI.enterKey("Added Copy of Book Successfully");
+    }
+
 }

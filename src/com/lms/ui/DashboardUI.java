@@ -1,5 +1,6 @@
 package com.lms.ui;
 
+import com.lms.Main;
 import com.lms.common.LmsConstant.Authorization;
 import com.lms.common.LmsUtility;
 import com.lms.common.UserSession;
@@ -7,6 +8,7 @@ import com.lms.common.UserSession;
 import java.io.IOException;
 
 import static com.lms.Main.bufferedReader;
+import static com.lms.Main.main;
 
 public class DashboardUI {
     public static void displayDashboard(){
@@ -67,6 +69,26 @@ public class DashboardUI {
                 BookUI.listBook();
                 mainMenu();
                 break;
+            case 9:
+                BookUI.addBookCopy();
+                mainMenu();
+                break;
+            case 11:
+                CheckoutUI.checkoutBook();
+                mainMenu();
+                break;
+            case 12:
+                CheckoutUI.getCheckoutEntries();
+                mainMenu();
+                break;
+            case 13:
+                CheckoutUI.getCheckoutEntryByLibraryMemberId();
+                mainMenu();
+                break;
+            case 10:
+                UserSession.destroySession();
+                Main.initApp();
+                break;
             case 0:
                 System.out.println("Closing an Application ....");
                 stopApplication();
@@ -105,6 +127,7 @@ public class DashboardUI {
                 .addLine("Press '7' To Search a Book")
                 .addLine("Press '8' To List All Book")
                 .addLine("Press '9' To Make a Copy of Book")
+                .addLine("Press '10' 'Logout'")
                 .addLine("Press '0' 'Exit'");
         formatMenu.print();
 
@@ -127,7 +150,9 @@ public class DashboardUI {
                 .addLine("Press '8' To List All Book")
                 .addLine("Press '9' To Make a Copy of Book")
                 .addLine("Press '11' To Checkout a Book")
-                .addLine("Press '12' View Checkout Record")
+                .addLine("Press '12' View All Checkout Record")
+                .addLine("Press '13' View Checkout Record of a Member")
+                .addLine("Press '10' 'Logout'")
                 .addLine("Press '0' 'Exit'");
         formatMenu.print();
 
@@ -140,8 +165,14 @@ public class DashboardUI {
                 .addLine("--Please select from below options--")
                 .addLine(
                         "********** MAIN MENU **********")
+                .addLine("Press '3' To List Member")
+                .addLine("Press '7' To Search a Book")
+                .addLine("Press '8' To List All Book")
                 .addLine("Press '11' To Checkout a Book")
-                .addLine("Press '12' View Checkout Record");
+                .addLine("Press '12' View All Checkout Record")
+                .addLine("Press '13' View Checkout Record of a Member")
+                .addLine("Press '10' 'Logout'")
+                .addLine("Press '0' 'Exit'");
         formatMenu.print();
 
     }

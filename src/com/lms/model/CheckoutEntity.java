@@ -2,6 +2,7 @@ package com.lms.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class CheckoutEntity implements Serializable {
     public static final double FINE_RATE = 0.25;// $0.25 / day for a fine rate
@@ -15,8 +16,9 @@ public class CheckoutEntity implements Serializable {
     private long overdue;//days passed return day
     private LocalDate paidDate;
     private static final long serialVersionUID = 5543070115257205802L;
+    private LibraryMember member;
     public CheckoutEntity(String entryId, String mId, LocalDate borrowedDate, LocalDate dueDate,
-                          LocalDate returnDate, BookCopy bookCopy, double fAmount, LocalDate pDate, long odue) {
+                          LocalDate returnDate, BookCopy bookCopy, double fAmount, LocalDate pDate, long odue, LibraryMember member) {
         this.entryId = entryId;
         this.borrowedDate = borrowedDate;
         this.dueDate = dueDate;
@@ -26,6 +28,7 @@ public class CheckoutEntity implements Serializable {
         this.fineAmount = fAmount;
         this.paidDate = pDate;
         this.overdue = odue;
+        this.member = member;
     }
 
     public long getOverdue() {
@@ -63,6 +66,8 @@ public class CheckoutEntity implements Serializable {
     public LocalDate getBorrowedDate() {
         return borrowedDate;
     }
+
+    public LibraryMember getMember() { return member;}
 
     public void setBorrowedDate(LocalDate borrowedDate) {
         this.borrowedDate = borrowedDate;

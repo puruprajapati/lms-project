@@ -3,6 +3,7 @@ package com.lms.dataaccess;
 import com.lms.common.LmsConstant.*;
 import com.lms.model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +50,13 @@ public class LoadData {
         }
     };
 
+    List<CheckoutEntity> allCheckoutEntries = new ArrayList<CheckoutEntity>(){
+        {
+            add(new CheckoutEntity("ent-1", "1000", LocalDate.now(), null, null, allBooks.get(0).getCopies()[0], 0.0, null, 0,
+                    new LibraryMember("1000", "Andy", "Rogers", "641-223-2211", addresses.get(4))));
+        }
+    };
+
     List<CheckoutRecord> allCheckoutRecords = new ArrayList<CheckoutRecord>() {
         {
             add(new CheckoutRecord("1001", new LibraryMember("100", "Hans", "Muster", "123124135", new Address("1000 N. 4th St.", "Fairfield", "IA", 52557))));
@@ -65,6 +73,7 @@ public class LoadData {
 
     public void loadCheckoutData(){
         DataAccessFacade.loadCheckoutRecordMap(allCheckoutRecords);
+        DataAccessFacade.loadCheckoutEntityMap(allCheckoutEntries);
     }
 
     public void loadBookData() {
