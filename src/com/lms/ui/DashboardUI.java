@@ -4,6 +4,7 @@ import com.lms.Main;
 import com.lms.common.LmsConstant.Authorization;
 import com.lms.common.LmsUtility;
 import com.lms.common.UserSession;
+import com.lms.rulesets.RuleException;
 
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public class DashboardUI {
         bufferedReader.readLine();
     }
 
-    public static void action(int selectedOption) throws IOException {
+    public static void action(int selectedOption) throws IOException, RuleException {
         switch (selectedOption){
             case 1:
                 MemberUI.addMember("Creating a new User");
@@ -100,7 +101,7 @@ public class DashboardUI {
         }
     }
 
-    private static void mainMenu() {
+    public static void mainMenu() {
         if(UserSession.getInstance().getAuthorization() == Authorization.ADMIN ){
             mainMenuForAdmin();
         }else if( UserSession.getInstance().getAuthorization() ==Authorization.BOTH){
