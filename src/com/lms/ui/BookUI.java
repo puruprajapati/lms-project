@@ -64,10 +64,10 @@ public class BookUI {
             while (!exit) {
                 System.out.println("Enter Author First Name:");
                 String authorFname = bufferedReader.readLine();
-                CommonRuleSet.isNumber(authorFname);
+                CommonRuleSet.isNullOrEmpty(authorFname);
                 System.out.println("Enter Author Last Name:");
                 String authorLname = bufferedReader.readLine();
-                CommonRuleSet.isNumber(authorLname);
+                CommonRuleSet.isNullOrEmpty(authorLname);
                 System.out.println("Enter Author Telephone Number:");
                 String authorTelNo = bufferedReader.readLine();
                 System.out.println("Enter Author Credential:");
