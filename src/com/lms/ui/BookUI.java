@@ -1,6 +1,7 @@
 package com.lms.ui;
 
 import com.lms.business.BookService;
+import com.lms.common.CommandLineTable;
 import com.lms.model.*;
 import com.lms.rulesets.CommonRuleSet;
 import com.lms.rulesets.RuleException;
@@ -15,8 +16,15 @@ public class BookUI {
     public static void listBook() throws IOException {
         System.out.println("List of books are:");
         List<Book> books = BookService.getInstance().getAllBooks();
+
+        CommandLineTable visualData = new CommandLineTable();
+        visualData.setShowVerticalLines(true);
+        visualData.setHeaders("ISBN", "Title", "Checkout Day Length", "Is Available", "Authors");
+
         for(Book book: books)
-            System.out.println(book);
+            visualData.addRow(book.getIsbn(), book.getTitle(), String.valueOf(book.getMaxCheckoutLength()), String.valueOf(book.isAvailable()), String.valueOf(book.getAuthors())); //System.out.println(book);
+
+        visualData.print();
 
         DashboardUI.enterKey("");
 
@@ -56,8 +64,10 @@ public class BookUI {
             while (!exit) {
                 System.out.println("Enter Author First Name:");
                 String authorFname = bufferedReader.readLine();
+                CommonRuleSet.isNumber(authorFname);
                 System.out.println("Enter Author Last Name:");
                 String authorLname = bufferedReader.readLine();
+                CommonRuleSet.isNumber(authorLname);
                 System.out.println("Enter Author Telephone Number:");
                 String authorTelNo = bufferedReader.readLine();
                 System.out.println("Enter Author Credential:");
@@ -83,7 +93,7 @@ public class BookUI {
                 book = new Book(isbn, title, maxCheckoutLength, authors);
             }
         }catch (RuleException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("WARNING: " + ex.getMessage());
         }
 
         return book;
@@ -97,7 +107,15 @@ public class BookUI {
         Book book = BookService.getInstance().searchBook(isbn);
 
         if(book != null){
-            DashboardUI.enterKey(book.toString());
+            CommandLineTable visualData = new CommandLineTable();
+            visualData.setShowVerticalLines(true);
+            visualData.setHeaders("ISBN", "Title", "Checkout Day Length", "Is Available", "Authors");
+
+            visualData.addRow(book.getIsbn(), book.getTitle(), String.valueOf(book.getMaxCheckoutLength()), String.valueOf(book.isAvailable()), String.valueOf(book.getAuthors())); //System.out.println(book);
+
+            visualData.print();
+
+            DashboardUI.enterKey("");
         } else {
             DashboardUI.enterKey("Book not found");
         }
