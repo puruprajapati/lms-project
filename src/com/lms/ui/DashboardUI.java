@@ -127,7 +127,7 @@ public class DashboardUI {
                 .addLine("Press '6' To Edit a Book")
                 .addLine("Press '7' To Search a Book")
                 .addLine("Press '8' To List All Book")
-                .addLine("Press '9' To Make a Copy of Book")
+                .addLine("Press '9' To Add Copy of Book")
                 .addLine("Press '10' 'Logout'")
                 .addLine("Press '0' 'Exit'");
         formatMenu.print();
@@ -149,7 +149,7 @@ public class DashboardUI {
                 .addLine("Press '6' To Edit a Book")
                 .addLine("Press '7' To Search a Book")
                 .addLine("Press '8' To List All Book")
-                .addLine("Press '9' To Make a Copy of Book")
+                .addLine("Press '9' To Add Copy of Book")
                 .addLine("Press '11' To Checkout a Book")
                 .addLine("Press '12' View All Checkout Record")
                 .addLine("Press '13' View Checkout Record of a Member")

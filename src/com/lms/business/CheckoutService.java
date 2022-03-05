@@ -7,11 +7,13 @@ import com.lms.model.BookCopy;
 import com.lms.model.CheckoutEntity;
 import com.lms.model.LibraryMember;
 
+import java.lang.reflect.Member;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CheckoutService {
     private static CheckoutService checkOutInstance = null;
@@ -47,11 +49,13 @@ public class CheckoutService {
             if (book.getCopies()[i].isAvailable()) {
                 bookCopy = book.getCopies()[i];
                 break;
-            } else {
-                return "No book copy found for this book.";
             }
         }
 
+        if(bookCopy==null)
+            return "No book copy found for this book.";
+
+        returnDate = LocalDate.now().plusDays(book.getMaxCheckoutLength());
         CheckoutEntity entity = new CheckoutEntity(entryId, memberId, borrowedDate, dueDate, returnDate, bookCopy, fAmount, pDate, odue, member);
         addNewCheckOut(entity);
         return "Checkout record Added successfully";
@@ -80,10 +84,11 @@ public class CheckoutService {
 
     public List<CheckoutEntity> getCheckoutEntryByLibraryMemberId(String memberId){
         List<CheckoutEntity> checkoutEntryList = getAllCheckoutEntries();
-        for(CheckoutEntity entry: checkoutEntryList){
-            if(!entry.getMemberId().equals(memberId))
-                checkoutEntryList.remove(entry);
-        }
+        LibraryMember member = MemberService.getInstance().getMember(memberId);
+        if(member == null) return null;
+
+        checkoutEntryList = checkoutEntryList.stream().filter(ce -> memberId.equals(ce.getMemberId())).collect(Collectors.toList());
+
         return checkoutEntryList;
 
     }

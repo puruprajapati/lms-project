@@ -19,10 +19,10 @@ public class BookUI {
 
         CommandLineTable visualData = new CommandLineTable();
         visualData.setShowVerticalLines(true);
-        visualData.setHeaders("ISBN", "Title", "Checkout Day Length", "Is Available", "Authors");
+        visualData.setHeaders("ISBN", "Title", "Checkout Day Length", "Is Available", "Number of Copies", "Authors");
 
         for(Book book: books)
-            visualData.addRow(book.getIsbn(), book.getTitle(), String.valueOf(book.getMaxCheckoutLength()), String.valueOf(book.isAvailable()), String.valueOf(book.getAuthors())); //System.out.println(book);
+            visualData.addRow(book.getIsbn(), book.getTitle(), String.valueOf(book.getMaxCheckoutLength()), String.valueOf(book.isAvailable()), String.valueOf(book.getCopies().length), String.valueOf(book.getAuthors())); //System.out.println(book);
 
         visualData.print();
 
@@ -129,7 +129,12 @@ public class BookUI {
     }
 
     public static void addBookCopy() throws IOException, RuleException {
-        Book bk = addBookFunction("Enter information of a book to be copied");
+        System.out.println("Enter information of a book to be copied");
+        Book bk = null;
+        System.out.println("Enter Book ISBN");
+        String isbn = bufferedReader.readLine();
+        CommonRuleSet.isNullOrEmpty(isbn);
+        bk = BookService.getInstance().searchBook(isbn);
         BookService.getInstance().addBookCopy(bk);
 
         DashboardUI.enterKey("Added Copy of Book Successfully");

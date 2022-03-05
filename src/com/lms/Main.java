@@ -40,17 +40,22 @@ public class Main {
 
     }
 
-    public static void appExecution() throws IOException, RuleException{
-        DashboardUI.displayDashboard();
-        DashboardUI.enterOption();
+    public static void appExecution() throws IOException, RuleException {
+        try {
+            DashboardUI.displayDashboard();
+            DashboardUI.enterOption();
 
-        // run app until user closes it
-        Boolean isExist = true;
-        while(isExist){
-            String option = bufferedReader.readLine();
-            CommonRuleSet.isNumber(option);
-            Integer selectedOption = Integer.valueOf(option);
-            DashboardUI.action(selectedOption);
+            // run app until user closes it
+            Boolean isExist = true;
+            while (isExist) {
+                String option = bufferedReader.readLine();
+                CommonRuleSet.isNumber(option);
+                Integer selectedOption = Integer.valueOf(option);
+                DashboardUI.action(selectedOption);
+            }
+        } catch (RuleException ex) {
+            appExecution();
+
         }
     }
 

@@ -43,7 +43,7 @@ public class LoadData {
             add(new Book("28-12331", "Antartica", 7, Arrays.asList(allAuthors.get(2))));
             add(new Book("99-22223", "Thinking Java", 21, Arrays.asList(allAuthors.get(3))));
             add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));
-            add(new Book("11-11451", "The Da Vinchi Code", 21, Arrays.asList(allAuthors.get(0), allAuthors.get(1))));
+            add(new Book("11-11111", "The Da Vinchi Code", 21, Arrays.asList(allAuthors.get(0), allAuthors.get(1))));
             add(new Book("11-12331", "Digital Fortress", 7, Arrays.asList(allAuthors.get(2))));
             add(new Book("11-22223", "Inception", 21, Arrays.asList(allAuthors.get(3))));
             add(new Book("11-56882", "Angels and Demon", 7, Arrays.asList(allAuthors.get(4))));
@@ -52,7 +52,7 @@ public class LoadData {
 
     List<CheckoutEntity> allCheckoutEntries = new ArrayList<CheckoutEntity>(){
         {
-            add(new CheckoutEntity("ent-1", "1000", LocalDate.now(), null, null, allBooks.get(0).getCopies()[0], 0.0, null, 0,
+            add(new CheckoutEntity("ent-1", "1000", LocalDate.now(), null, LocalDate.now().plusDays(7), allBooks.get(0).getCopies()[0], 0.0, null, 0,
                     new LibraryMember("1000", "Andy", "Rogers", "641-223-2211", addresses.get(4))));
         }
     };
@@ -79,6 +79,9 @@ public class LoadData {
     public void loadBookData() {
         allBooks.get(0).addCopy();
         allBooks.get(0).addCopy();
+        allBooks.get(1).addCopy();
+        allBooks.get(1).addCopy();
+        allBooks.get(1).addCopy();
         allBooks.get(1).addCopy();
         allBooks.get(3).addCopy();
         allBooks.get(2).addCopy();

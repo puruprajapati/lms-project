@@ -62,7 +62,7 @@ public class CheckoutUI {
         String memberId = bufferedReader.readLine();
         List<CheckoutEntity> entries = CheckoutService.getInstance().getCheckoutEntryByLibraryMemberId(memberId);
         if(entries == null || entries.size() == 0){
-            DashboardUI.enterKey("Invalid Member Id");
+            DashboardUI.enterKey("No Records..");
         }
         else {
             CommandLineTable visualData = new CommandLineTable();
