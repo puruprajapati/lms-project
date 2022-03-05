@@ -56,6 +56,22 @@ public class CheckoutUI {
 
     }
 
+    public static void getBooksWithExceedDueDate() throws IOException{
+        System.out.println("Books crossing due date");
+        List<CheckoutEntity> entries = CheckoutService.getInstance().getBooksWithExceedDueDate();
+        CommandLineTable visualData = new CommandLineTable();
+        visualData.setShowVerticalLines(true);
+        visualData.setHeaders("Book ISBN", "Book Title", "Member ID", "Member Name", "Burrowed Date", "Return Date", "Due Date");
+
+        for (CheckoutEntity entry : entries)
+            visualData.addRow(entry.getBookCopy().getBook().getIsbn(), entry.getBookCopy().getBook().getTitle(), entry.getMemberId(), entry.getMember().getFirstName() + " "
+                    + entry.getMember().getLastName(), String.valueOf(entry.getBorrowedDate()),  String.valueOf(entry.getReturnDate()), String.valueOf(entry.getDueDate()));
+
+        visualData.print();
+
+        DashboardUI.enterKey("");
+    }
+
     public static void getCheckoutEntryByLibraryMemberId() throws IOException{
         System.out.println("List of checkout entries by Member are:");
         System.out.println("Enter Member Id: ");

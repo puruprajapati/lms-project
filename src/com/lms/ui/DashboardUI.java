@@ -86,6 +86,10 @@ public class DashboardUI {
                 CheckoutUI.getCheckoutEntryByLibraryMemberId();
                 mainMenu();
                 break;
+            case 14:
+                CheckoutUI.getBooksWithExceedDueDate();
+                mainMenu();
+                break;
             case 10:
                 UserSession.destroySession();
                 Main.initApp();
@@ -153,6 +157,7 @@ public class DashboardUI {
                 .addLine("Press '11' To Checkout a Book")
                 .addLine("Press '12' View All Checkout Record")
                 .addLine("Press '13' View Checkout Record of a Member")
+                .addLine("Press '14' View Books having Due date Crossed")
                 .addLine("Press '10' 'Logout'")
                 .addLine("Press '0' 'Exit'");
         formatMenu.print();
@@ -172,6 +177,7 @@ public class DashboardUI {
                 .addLine("Press '11' To Checkout a Book")
                 .addLine("Press '12' View All Checkout Record")
                 .addLine("Press '13' View Checkout Record of a Member")
+                .addLine("Press '14' View Books having Due date Crossed")
                 .addLine("Press '10' 'Logout'")
                 .addLine("Press '0' 'Exit'");
         formatMenu.print();

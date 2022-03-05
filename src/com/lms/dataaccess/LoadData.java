@@ -52,7 +52,9 @@ public class LoadData {
 
     List<CheckoutEntity> allCheckoutEntries = new ArrayList<CheckoutEntity>(){
         {
-            add(new CheckoutEntity("ent-1", "1000", LocalDate.now(), null, LocalDate.now().plusDays(7), allBooks.get(0).getCopies()[0], 0.0, null, 0,
+            add(new CheckoutEntity("ent-1", "1000", LocalDate.now(), LocalDate.now().plusDays(8), LocalDate.now().plusDays(7), allBooks.get(0).getCopies()[0], 0.0, null, 0,
+                    new LibraryMember("1000", "Andy", "Rogers", "641-223-2211", addresses.get(4))));
+            add(new CheckoutEntity("ent-2", "1000", LocalDate.now().minusDays(14), LocalDate.now().minusDays(6), LocalDate.now().minusDays(7), allBooks.get(1).getCopies()[0], 0.0,  LocalDate.now().minusDays(6), 0,
                     new LibraryMember("1000", "Andy", "Rogers", "641-223-2211", addresses.get(4))));
         }
     };

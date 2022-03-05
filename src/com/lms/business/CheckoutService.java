@@ -92,4 +92,13 @@ public class CheckoutService {
         return checkoutEntryList;
 
     }
+
+    public List<CheckoutEntity> getBooksWithExceedDueDate(){
+        List<CheckoutEntity> checkoutEntryList = getAllCheckoutEntries();
+        checkoutEntryList = checkoutEntryList.stream().filter(ce -> LocalDate.now().isAfter(ce.getDueDate())).collect(Collectors.toList());
+
+        return checkoutEntryList;
+
+    }
+
 }
